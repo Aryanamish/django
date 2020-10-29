@@ -1,22 +1,22 @@
-#Django MultiFormClass
+# Django MultiFormClass
 
 This Model can be used to create multiple model form using one class
 
-##How to use
+## How to use
 Just copy and paste the Script in your project directory and import MultiModelForm
 
-###Some Additionals Features are
+### Some Additionals Features are
 
--You can add multiple model by specifying it in Meta.model (list)
--can add common attribute to all the fields
--can add different HTML attribute to different Elements
+* You can add multiple model by specifying it in Meta.model (list)
+* can add common attribute to all the fields
+* can add different HTML attribute to different Elements
 
 ** In case you are using Foreign in your model You have to override the save() method  **
 
-###Overriding default Save method
+### Overriding default Save method
 -The default save method return list of models in the order of Meta.model property
 
-'''
+```
 class TestForm:
 	class Meta:
 		models = [model1, model2]
@@ -29,9 +29,9 @@ class TestForm:
 	    	model1.save()
 	    	model2.save()
 
-'''
+```
 
-'''
+```
 from .multimodelform import MultiModelForm
 from . import models
 
@@ -58,4 +58,4 @@ class MultipleForm(MultiModelForm):
 		    'autocomplete': 'off',
 		}
 		include = []
-'''
+```
