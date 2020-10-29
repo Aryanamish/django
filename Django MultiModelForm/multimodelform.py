@@ -1,5 +1,6 @@
 from django import forms
 from django.forms.models import  DeclarativeFieldsMetaclass
+from django.forms.models import modelform_factory
 
 
 class MultiModelFormMetaClass(DeclarativeFieldsMetaclass):
@@ -7,8 +8,6 @@ class MultiModelFormMetaClass(DeclarativeFieldsMetaclass):
     def __new__(mcs, name, bases, attrs):
         # attrs['__init__'] = mcs.cus__init
         models = attrs['Meta'].model
-        print(attrs['Meta'].foreginkey_relation)
-        setattr(attrs["Meta"], 'foreign_key_relation', [])
         model_field  = {}
         for i in models:
             model_field[i] = i._meta.get_fields()
@@ -86,8 +85,6 @@ class MultiModelForm(forms.Form, metaclass=MultiModelFormMetaClass):
         field_classes = {}
         attrs = {}
         common_attrs = {}
-        foreginkey_relation = {}
-        pk = ''
 
     def save(self, commit=True):
         data = []
@@ -100,9 +97,3 @@ class MultiModelForm(forms.Form, metaclass=MultiModelFormMetaClass):
                 d.save()
             data.append(d)
         return data
-        # pk = self.Meta.pk
-        # if self.Meta.pk != '':
-        #     pk_value = self.fields.get(pk)
-        #     if pk_value is not None:
-        #         print('hello')
-        # return None
