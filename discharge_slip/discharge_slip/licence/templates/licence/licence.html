@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Descharge Slip</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% load  static %}
+
+    <link rel="stylesheet" href="{% static 'slip/icon/fontawesome/css/fontawesome.min.css' %}">
+
+    <link rel="shortcut icon" type="image/png" href="{%  static 'favicon.ico' %}"/>
+
+    <script src="{% static 'slip/js/jquery/jquery.js' %}"></script>
+    <script src="{% static 'slip/js/bootstrap/bootstrap.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'slip/css/bootstrap/bootstrap.css' %}">
+    <script src = "{% static 'slip/js/main.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'slip/css/main.css' %}">
+
+</head>
+<body>
+    <div class="modal fade in " id="patient_select" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-header-hide">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title center-text" id="modal_header">
+                        {% if message %}
+                            {{ message }}
+                        {% else %}
+                            Piracy Protection
+                        {% endif %}
+                    </h4>
+                </div>
+            </div>
+              <form action="/" method="POST">
+                  {% csrf_token %}
+                <div class="modal-body" id="data">
+                    <div class="row form-group pad">
+                        <input class="form-control" type="password" name="psw" placeholder="Enter Admin Password To install the software"/>
+                        <strong>Developed By : <i>Aryan Amish</i></strong><br>
+
+                    </div>
+                </div>
+
+
+                <div class="modal-footer">
+
+                    <div class="modal-footer-hide">
+                        <button class="btn btn-success">Install</button>
+                    </div>
+                </div>
+              </form>
+          </div>
+
+        </div>
+  </div>
+  <button id='btn_patient_select'type="button" class="btn btn-info btn-lg hidden" data-toggle="modal" data-target="#patient_select">Open Modal</button>
+<script>
+    document.getElementById('btn_patient_select').click();
+</script>
+<style>
+    .pad{
+        padding:3%;
+    }
+</style>
+</body>
+</html>

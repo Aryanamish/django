@@ -1,0 +1,16 @@
+{% extends 'report/base.html' %}
+
+{% block sidenavContent %}
+    {% if sideLinks %}
+        {% for i in sideLinks%}
+            <li><a href="{% url 'report:report' i.slug %}">{{ i.side_nav }}</a></li>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {% if html %}
+        {{ html|safe }}
+    {% endif %}
+{% endblock %}
+

@@ -1,0 +1,152 @@
+{% extends 'report/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block cssLib %}
+    <link rel="stylesheet" href="{% static 'layout/css/main2.css' %}">
+{#    <link rel="stylesheet" href="{% static 'layout/css/main.css' %}"/>#}
+
+    <link rel="stylesheet" href="{% static 'report/css/jquery/resize.css' %}">
+{% endblock %}
+
+{% block jsScript %}
+    <script>
+        const AJAX_SAVE_TEMPLATE_URL = "{% url 'layout:saveTemp' %}";
+        const AJAX_LOAD_TEMPLATE_URL = "{% url 'layout:loadTemp' %}";
+        const AJAX_CHECK_TEMPLATE_URL = "{% url 'layout:checkTemp' %}";
+        let TEMP_NAMES = {{ temp_names|safe }};
+        {#$(document).ready(function(){#}
+        {#    document.getElementById('save_load').classList.remove('animatezoomin');#}
+        {#document.getElementById('save_load').classList.add('animatezoomout');#}
+        {#})#}
+
+
+    </script>
+{% endblock %}
+
+{% block jsLib %}
+{#    <script src = "{% static 'layout/js/function.js' %}"></script>#}
+    <script src = "{% static 'report/js/jquery/jqueryui.js' %}"></script>
+    <script src="{% static 'database/js/plugin/right-click-menu.js' %}"></script>
+    <script src="{% static 'layout/js/ajax.js' %}"></script>
+{#    <script src="{% static 'layout/js/main.js' %}"></script>#}
+    <script src="{% static 'layout/js/main2.js' %}"></script>
+    <script src="{% static 'layout/js/interface.js' %}"></script>
+    <script src="{% static 'layout/js/property.js' %}"></script>
+
+{% endblock %}
+
+
+{% block outerContent %}
+    <!-- Right click -->
+    <div id="rightClickMenu">
+
+        <ul class="right-click-drop-down">
+            <div>
+                <li><a>delete element</a><shortcut>CTRL+Z</shortcut></li>
+                <li><a fun='code_model'>Event</a><shortcut>SHIFT+Z</shortcut></li><hr>
+                <!-- <li><a>fix element</a><shortcut>CTRL+K</shortcut></li> -->
+                <!-- <li><a fun = "del">delete element</a><shortcut>CTRL+Q</shortcut></li> -->
+                <li><a>property</a><shortcut>SHIFT+P</shortcut></li>
+                <li><a fun='menu'>Menu</a><shortcut>SHIFT+M</shortcut></li>
+            </div>
+        </ul>
+
+    </div>
+
+    <!-- Save and load model -->
+    <div id="save_load" class="modal_diloge">
+        <div class="modal_dialoge_content animatezoomin">
+            <div>
+                <div id="tab" >
+                    <button class="tablinks default createNew" body="createTemplate">Create Temp</button>
+                    <button class="tablinks load" body="loadTemplate">Load Temp</button>
+                </div>
+                <!-- Tab content -->
+                <div id="createTemplate" class="tabcontent" >
+                    <form onsubmit="ajax.saveTemp(this)" action="javascript:false" url = "{% url 'layout:saveTemp' %}">{% csrf_token %}
+                        {{ save_form|crispy }}
+                        <button class='cornerBtn button' type="submit">Create</button>
+                    </form>
+                </div>
+                <div id="loadTemplate" class="tabcontent" >
+
+                   <div id='allTemp' class="loading_div">
+                        <!-- <button class="load_temp_btn">Temp1</button><br> -->
+                       {% for i in temp_names %}
+                           <button class="load_temp_btn">{{ i }}</button>
+                       {% endfor %}
+                   </div>
+                    <form onsubmit="loadTemplate(); return false">{% csrf_token %}
+                       <button class = "cornerBtn button" type="submit">Load</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Code model is here -->
+    <div id='code_model' class="drag" >
+        <!-- Tab buttons -->
+        <div id="tab" class="clickDragMe">
+            <button class="tablinks css" body="css">CSS</button>
+            <button class="tablinks default js" body="js">JavaScript</button>
+            <button class="tablinks widget" body="widget">Widget</button>
+            <a class="close" id="close"></a>
+        </div>
+        <div id="widgetOption">
+           <select></select><button id="widgetDeploy">Deploy</button>
+        </div>
+        <!-- Tab content -->
+        <div id="css" class="tabcontent write" contenteditable='true'></div>
+        <div id="js" class="tabcontent write" contenteditable='true'></div>
+        <div id="widget" class="tabcontent write" contenteditable='true'>
+        </div>
+    </div>
+
+    <!-- Loading screen -->
+    <div id="loading" class="animatezoomout">
+        <img alt="Image cannot be loaded" id="logo" src="{% static 'layout/images/logo.jpg' %}">
+    </div>
+{% endblock %}
+<!-- Main content of the page including nav bar and sidebar -->
+
+{% block sidebar %}
+
+        <div id="sidemenu_nav" class="tab" content="sidemenu_content">
+            <button id="nav_tool_box" tabcontent="tool_box"default="true">Menu</button>
+            <button id='nav_property' tabcontent="property" >Property</button>
+        </div>
+        <div id="sidemenu_content" class="tab_content">
+            <div id="tool_box" >
+                <ul class="sidebar">
+                    <li><a dtype="textbox" eventFunction="click:createTextbox;">Text Box</a></li>
+                    <li><a dtype="dropdown" eventFunction="click:createDropDown;">Drop Down</a></li>
+                    <li><a dtype="label" eventFunction="click:createLabel;">Label</a></li>
+                    <li><a dtype="button" eventFunction="click:createButton;">Button</a></li>
+                    <li><a dtype="widget" eventFunction="click:createWidget;">Widget</a></li>
+                 </ul>
+            </div>
+            <div id="property" >
+
+            </div>
+        </div>
+{% endblock %}
+
+
+
+
+{% block navbarAdd %}
+    <li ><a href="javascript:ajax.saveTemp(this)"> Save</a></li>
+    <li ><a href="#"> Load</a></li>
+{% endblock %}
+{% block navbarPrint %}{% endblock %}
+
+
+
+ <div class="dropdown">
+
+                <input type="text" drop-txt='true' class="drop-txt" tabindex="1">
+                <button class="dropdown-toggle drop-btn" style="position:absolute" type="button" data-toggle="dropdown" >
+                    <div class='caret'></div>
+                </button>
+ </div>

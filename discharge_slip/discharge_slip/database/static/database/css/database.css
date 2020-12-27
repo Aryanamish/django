@@ -1,0 +1,15 @@
+/*database:diagnosis*/
+
+.input-cross-database{
+    position: absolute;
+    padding: 10px;
+    margin-right:2%;
+    right:0px;
+}
+.input-cross-database:hover{
+    color:#e61111;
+    cursor:pointer;
+}
+input[type=checkbox]{
+  margin-top:22px;
+}

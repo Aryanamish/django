@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+{% load errors %}
+<head>
+    <meta charset="UTF-8">
+    <title>Discharge-Slip</title>
+    <style>
+        h1{
+            display: inline;
+            font-size: 2.9em;
+        }
+        h2{
+            font-size: 1.7em;
+
+        }
+        .center{
+            text-align: center;
+        }
+        .right{
+            text-align: right;
+        }
+
+        .left{
+            text-align: left;
+        }
+
+        .field{
+            font-size: 1.7em;
+        }
+        .value{
+            font-size: 1.6em;
+        }
+        .top-margin-30{
+            padding-top:30px;
+        }
+        .top-margin-15{
+            padding-top:15px;
+        }
+        hr{
+            margin-bottom: 30px;
+             margin-top: 20px;
+        }
+        .investigation{
+            padding-top:20px;
+        }
+        .slip{
+            text-align: right;
+            position: fixed;
+
+        }
+    </style>
+</head>
+<body>
+    <div id="printArea">
+        <div id="header">
+            <h1 class="center">Kumar Hospital and Research Institute</h1>
+            <h3 class="center"><i>New Bypass NH-30, Khemnichak Patna-27. contact no. +91-7091975393</i></h3>
+            <h3 class="slip"><b>Slip Id: </b><i> {{ data.slip_id|slip_id }}</i></h3>
+
+        </div>
+        <hr/>
+        <div id="body">
+            <table border="0">
+                <tr>
+                    <td class="field left"><b>Patient Name : </b></td>
+                    <td class="value left"> {{ data.patient_id.patient_name }}</td>
+                    <td class="field right"><b>SEX : </b></td>
+                    <td class="value left">{{ data.patient_id.sex }}</td>
+                    <td class="field right"><b>Age : </b></td>
+                    <td class="value left">{{ data.patient_id.age }} yrs</td>
+                </tr>
+                <tr>
+                    <td class="field left"><b>Address : </b></td>
+                    <td class="value left top-margin-15" colspan="2">{{ data.address }}</td>
+                    <td class="field right" colspan="2"><b>Phone : </b></td>
+                    <td class="value left">{{ data.phone }}</td>
+
+                </tr>
+                <tr class="top-margin-30">
+                    <td class="field left" colspan="2"><b>Date of Admission : </b></td>
+                    <td class="value left" colspan="3">{{ data.date_of_admission }}</td>
+                </tr>
+                <tr>
+                    <td class="field left" colspan="2"><b>Date of Operation : </b></td>
+                    <td class="value left" colspan="3">{{ data.date_of_operation }}</td>
+                </tr>
+                <tr>
+                    <td class="field left" colspan="2"><b>Date of Discharge : </b></td>
+                    <td class="value left" colspan="3">{{ data.date_of_discharge }}</td>
+                </tr>
+            </table>
+            <hr />
+            <table>
+                <tr>
+                    <td class="field left"  ><b>Diagnosis : </b></td>
+                    <td class="value left" colspan="4">{{ data.diagnosis }}</td>
+                </tr>
+                <tr>
+                    <td class="field left"  ><b>Complain : </b></td>
+                    <td class="value left" colspan="4">{{ data.complain }}</td>
+                </tr>
+            </table>
+            <hr />
+            <table >
+                <tr>
+                    <td class="field left" colspan="2" ><b>Invatigation On : </b></td>
+                    <td class="value right" ><b>Result</b></td>
+                </tr>
+
+                {% for i ,j in data.investigation %}
+                    <tr class="investigation">
+                        <td class="field left" colspan="2">{{ i|date }}</td>
+
+                        <td class="value left"  colspan="4">
+                            {{ j }}
+                        </td>
+
+                    </tr>
+                {% endfor %}
+
+            </table>
+            <hr/>
+            <table>
+                <tr>
+                    <td class="field left"><b>OT Procedure : </b></td>
+                    <td class="value left" colspan="2">{{ data.ot_procedure }}</td>
+                </tr>
+            </table>
+<br /><br /><hr />
+            <table>
+                <tr>
+                    <td class="center" colspan="2"><h2 class="center">Advice</h2></td>
+                </tr>
+
+                {% for i, j in data.advice %}
+                    <tr>
+                        <td class="field left">{{ i }}</td>
+                        <td class="value left">{{ j }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

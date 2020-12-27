@@ -1,0 +1,209 @@
+{% load errors %}
+
+    {% if form.non_field_errors %}
+        <div class=" alert alert-danger fade in alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            {{ form.non_field_errors }}
+        </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-lg-6 col-sm-6 form-group
+            {% has_error form.patient_name.errors %}">
+            <div class="col-lg-3 col-sm-3">
+                {% label form.patient_name.label form.label_temp %}
+            </div>
+             <div class="col-lg-9 col-sm-9">
+                {{ form.patient_name }}
+
+                {% help_block form.patient_name.errors form.help_block_temp %}
+            </div>
+        </div>
+        <div class="col-lg-6 col-sm-6">
+            <div class="form-group
+            {% has_error form.age.errors %}">
+                <div class="col-lg-2 col-sm-2 form-group">
+                    {% label form.age.label form.label_temp %}
+                </div>
+                 <div class="col-lg-2 col-sm-2">
+                    {{ form.age }}
+                     {% help_block form.age.errors form.help_block_temp %}
+                </div>
+            </div>
+            <div class="form-group
+             {% has_error form.sex.errors %}">
+                <div class="col-lg-2 col-sm-2">
+                    {% label form.sex.label form.label_temp %}
+                </div>
+                 <div class="col-lg-3 col-sm-3">
+                    {{ form.sex }}
+                    {% help_block form.sex.errors form.help_block_temp %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6 col-sm-6 form-group
+        {% has_error form.address.errors %}">
+            <div class="col-lg-3 col-sm-3">
+                {% label form.address.label form.label_temp %}
+            </div>
+            <div class="col-lg-9 col-sm-9">
+                {{ form.address }}
+                {% help_block form.address.errors form.help_block_temp %}
+            </div>
+        </div>
+        <div class="col-lg-6 col-sm-6 form-group
+        {% has_error form.phone.errors %}">
+            <div class="col-lg-3 col-sm-3">
+                {% label form.phone.label form.label_temp %}
+            </div>
+            <div class="col-lg-6 col-sm-6">
+                {{ form.phone }}
+                {% help_block form.phone.errors form.help_block_temp %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 form-group
+        {% has_error form.date_of_admission.errors %}">
+            <div class="col-lg-3 col-sm-3">
+                {% label form.date_of_admission.label form.label_temp %}
+            </div>
+            <div class="col-lg-pull-1 col-sm-pull-1 col-lg-5 col-sm-5">
+                {{ form.date_of_admission }}
+                {% help_block form.date_of_admission.errors form.help_block_temp %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 form-group
+        {% has_error form.date_of_operation.errors %}">
+            <div class="col-lg-3 col-sm-3">
+                {% label form.date_of_operation.label form.label_temp %}
+            </div>
+            <div class="col-lg-pull-1 col-sm-pull-1 col-lg-5 col-sm-5">
+                {{ form.date_of_operation }}
+                {% help_block form.date_of_operation.errors form.help_block_temp %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 form-group
+        {% has_error form.date_of_discharge.errors %}">
+            <div class="col-lg-3 col-sm-3">
+                {% label form.date_of_discharge.label form.label_temp %}
+            </div>
+            <div class="col-lg-pull-1 col-sm-pull-1 col-lg-5 col-sm-5">
+                {{ form.date_of_discharge }}
+                {% help_block form.date_of_discharge.errors form.help_block_temp %}
+            </div>
+        </div>
+    </div>
+
+    <hr/>
+
+    <div class="row form-group
+    {% has_error form.diagnosis.errors %}">
+        <div class="col-lg-3 col-sm-3 ">
+            {% label form.diagnosis.label form.label_temp %}
+        </div>
+        <div class="col-lg-5 col-sm-5">
+            {{ form.diagnosis }}
+            {% help_block form.diagnosis.errors form.help_block_temp %}
+        </div>
+    </div>
+
+    <div class="row form-group
+    {% has_error form.complain.errors %}">
+        <div class="col-lg-3 col-sm-3 ">
+            {% label form.complain.label form.label_temp %}
+        </div>
+        <div class="col-lg-5 col-sm-5">
+            {{ form.complain }}
+            {% help_block form.complain.errors form.help_block_temp %}
+        </div>
+    </div>
+
+    <hr/>
+
+    <div id="investigation">
+    <input type="hidden" id ="investigation_counter" name="investigation_counter" value="{{ form.investigation }}" />
+    {% with ''|center:form.investigation as range %}
+        {% for _ in range %}
+
+        <div class="row form-group
+        {% has_error form.date_of_investigation.errors %}">
+
+            <div class="col-lg-5 col-sm-5">
+                <div class="col-lg-3 col-sm-3">
+                    {% label form.date_of_investigation.label form.label_temp %}
+                </div>
+                <div class="col-lg-7 col-sm-7">
+                    {% dynamic form forloop.counter 'date_of_investigation' %}
+
+                    {% help_block form.date_of_investigation.errors form.help_block_temp %}
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-6">
+
+                {% dynamic form forloop.counter 'investigation_textarea' %}
+
+                {% help_block form.investigation_textarea.errors form.help_block_temp %}
+
+            </div>
+                <i class="input-cross-investigation fa fa-times icon" style="position:relative"></i>
+            </div>
+        {% endfor %}
+
+    {% endwith %}
+
+    </div>
+    <br />
+        <button id="btn_add_investigation" class="btn btn-block btn-black">+</button>
+
+<hr />
+
+
+     <div class="row form-group
+    {% has_error form.ot_procedure.errors %}">
+        <div class="col-lg-3 col-sm-3">
+            {% label form.ot_procedure.label form.label_temp %}
+        </div>
+        <div class="col-lg-5 col-sm-5">
+            {{ form.ot_procedure }}
+            {% help_block form.ot_procedure.errors form.help_block_temp %}
+        </div>
+    </div>
+<hr />
+
+
+
+    <h3 class="center-text">Advice</h3>
+<div id="advice">
+    <input type="hidden" id="advice_counter" name="advice_counter" value="{{ form.advice }}" />
+
+    {% with ''|center:form.advice as range %}
+        {% for _ in range %}
+            <div class="row form-group" >
+                <div class="col-lg-5 col-sm-5">
+                    {% dynamic form forloop.counter 'advice_field' %}
+
+                </div>
+                <div class="col-lg-push-1 col-sm-push-1 col-lg-5 col-sm-5">
+                    <i class="input-cross-advice fa fa-times icon"></i>
+
+                    {% dynamic form forloop.counter 'advice_value' %}
+                </div>
+            </div>
+        {% endfor %}
+    {% endwith %}
+</div>
+    <br /><br />
+    <button class="btn btn-block btn-black" id="btn_add_advice">+</button>
+

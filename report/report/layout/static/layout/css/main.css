@@ -1,0 +1,441 @@
+*{
+  padding:0px;
+  margin:0px;
+  
+}
+
+
+
+
+
+#sidebar {
+
+  overflow-y: auto;
+  overflow-x: auto;
+  width: 26%;
+  background-color : rgb(32, 30, 30);
+  position:fixed;
+  height: 100%;
+  left:0px;
+  top:60px;
+  transition: 0.5s;
+  max-width:350px;
+}
+
+
+#sidemenu_nav{
+  position: fixed;
+  display:inline;
+  color:white;
+  font-size: 20px;
+  height:100%;
+  line-height: 1.9em;
+  background-color:rgb(60, 57, 57);
+  max-width: 45px;
+  
+}
+
+#sidemenu_nav a{
+  cursor: pointer;
+  padding:10px;
+}
+#sidemenu_nav div:hover{
+  background-color:rgb(32, 30, 30) ;
+  
+}
+
+#sidemenu_content{
+  margin-left:30px;
+}
+
+#sidebar #sidemenu_content a{
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color:white;
+  padding:10px 20px;
+  margin:10px;
+  font-size: 18px;
+}
+
+#sidebar #sidemenu_content a:hover{
+  background-color:green;
+}
+
+.drag{
+  position: absolute;
+  z-index: 9;
+  
+}
+
+.dragClickMe {
+  padding: 10px;
+  cursor: default;
+  z-index: 10;
+  
+}
+
+#rightClickMenu{
+    display:none;
+    position: absolute;
+    z-index:99;
+    cursor: pointer;
+    background-color: white;
+}
+
+/*.caret{*/
+/*  border: solid black;*/
+/*  border-width: 0 3px 3px 0;*/
+/*  display: inline-block;*/
+/*  padding: 3px;*/
+/*  */
+/*}*/
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.dropdown-menu{
+  list-style-type: none;
+ 
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.dropdown-menu li a{
+  text-decoration: none;
+  padding:10px 5px;
+  line-height: 2em;
+  
+}
+
+
+.dropdown-menu li:hover{
+  background-color:#eae8e8;;
+}
+
+.dropdown-menu li shortcut{
+  color:grey;
+  margin:10px 10px;
+  font-size:12px;
+  padding:10px 10px;
+}
+
+hr{
+  color:grey;
+  margin: 10px;
+}
+
+.selected{
+  box-shadow: 2px 2px 5px -1px #2b2b94b3;
+  border:1px solid #3737ffb3;
+
+}
+
+
+
+#property{
+  margin-left:20px;
+  margin-top:10px;
+  color:white;
+  margin-bottom: 60px;
+  box-sizing: content-box;
+  
+}
+#property select{
+  width: 100%;
+}
+
+table, th, td{
+  padding:5px;
+  border-collapse: collapse;
+  border: 1px solid white;
+  
+ 
+}
+
+
+
+#code_model{
+  left:46px;
+  width: 50%;
+  height:80%;
+  top:10px;
+  display: none;
+  overflow: auto;
+  box-shadow: 2px 2px 5px -1px black;
+  border:1px solid rgba(0, 0, 0, 0.63);
+  border-width: 2px;
+  z-index:109;
+  position:fixed;
+  
+  margin-bottom:65px;
+  background-color: white;
+  
+  
+}
+
+
+
+.write{
+  position: relative;
+  padding: 20px;
+  font-size: 1.2em;
+  height:100%;
+  border-color: white;
+}
+
+
+#tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  position: relative;;
+  width: 100%;
+}
+#tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+#tab button:hover {
+  background-color: #ddd;
+}
+#tab button.active {
+  background-color: #ccc;
+}
+
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  
+}
+
+.close {
+  position: absolute;
+  right: 8px;
+  top: 4px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+}
+.close:hover {
+  opacity: 1;
+}
+.close:before, .close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 33px;
+  width: 2px;
+  background-color: #333;
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
+}
+
+#widgetOption select{
+  width:80%;
+}
+#widgetOption button{
+ padding-right:20px;
+ padding-left: 20px;
+}
+
+#save_load{
+  width: 100%;
+  height:100%;
+  position:fixed;
+  padding-top:60px;
+  top:0px;
+  left:0px;
+  overflow-y: auto;
+  background-color: rgb(0,0,0,0.4);
+  z-index: 90;
+  display:block;
+}
+
+
+.save_load_content{
+  margin:5% auto 15%;
+  width:30%;
+  background-color:white;
+  padding:3%;
+  padding-bottom:7%;
+  text-align: center;
+  
+  position: relative;
+}
+
+/* INPUT text type */
+
+.save_load_content input[type=text]{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+.message{
+  font-style:italic;
+  float:right;
+  display:block;
+  padding-top:20px;
+}
+.green{
+  color:#1cbb1c;
+}
+.red{
+  color:red;
+}
+
+.save_load_content button{
+  width:50%;
+  box-shadow:border-box;
+}
+.temp_name{
+  padding-top:5%;
+  float:left;
+  display:block;
+}
+
+#createTemplate button:hover{
+background-color: #040604f0;
+}
+
+input[type=text]{
+  outline:none;
+}
+
+#loadTemplate{
+  padding-top:20px;
+}
+#allTemp{
+  background-color:#544c4c0d;
+  overflow-x:hidden;
+  border:2px solid grey;
+  width:100%;
+  height:100%;
+
+  min-height:300px;
+  max-height:300px;;
+overflow-y:auto;
+position:relative;
+  
+}
+
+.cornerBtn{
+  background-color: #040604;
+  color: white;
+  outline:0;
+  padding: 14px 20px;
+  margin: 25px 0px;
+  border: none;
+  cursor: pointer;
+  width: 100px;
+  float:right;
+
+
+}
+
+
+.load_temp_btn{
+  background-color:#e4e0e00d;
+}
+#allTemp button{
+  border:none;
+  width:100%;
+  outline:0;
+  padding:10px;
+  margin-left:10px;
+  opacity:1;
+}
+#allTemp button:hover, .load_temp_btn_active{
+  background-color:#cccccc;
+}
+
+
+
+
+/* Add Zoom Animation */
+.animatezoomin{
+  -webkit-animation: animatezoom 0.5s;
+  animation: animatezoomin 0.5s;
+  animation-timing-function: ease-in;
+  -webkit-animation-timing-function: ease-in;
+  
+}
+
+
+@-webkit-keyframes animatezoomin {
+  from {-webkit-transform: scale(0)} 
+  to {-webkit-transform: scale(1)}
+}
+  
+@keyframes animatezoomin {
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
+}
+
+
+.animatezoomout{
+  -webkit-animation: animatezoomout 0.3s;
+  animation: animatezoomout 0.3s;
+  animation-fill-mode: forwards;
+ -webkit-animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+  -webkit-animation-timing-function: ease-out;
+}
+
+@-webkit-keyframes animatezoomout{
+  0% {-webkit-transform: scale(1)} 
+  100% {-webkit-transform: scale(0);display:none;}
+ 
+}
+  
+@keyframes animatezoomout {
+  0% {transform: scale(1)} 
+  100%{transform: scale(0);display:none;}
+}
+
+
+/*loading screen style*/
+#loading{
+  position:fixed;
+    height: 100%;
+    width:100%;
+    background-color:white;
+    z-index:99;
+}
+
+#logo{
+position: fixed;
+    top: 50%;
+    left: 50%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

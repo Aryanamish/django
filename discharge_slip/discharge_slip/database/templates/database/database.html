@@ -1,0 +1,29 @@
+{% extends 'database/base.html' %}
+{% load errors %}
+{% block content %}
+    {% csrf_token %}
+    <div class="row">
+    <div class="col-lg-12 col-sm-12">
+        <ol id="input_area">
+            {% with ''|center:form.no_of_fields as range %}
+                {% for _ in range %}
+                        <li>
+                            <i class="input-cross-database fa fa-times icon"></i>
+                                {% dynamic form forloop.counter 'data' %}
+                                {% help_block form.data.errors form.help_block_temp %}
+                        </li>
+                {% endfor %}
+            {% endwith %}
+        </ol>
+    </div>
+    <hr />
+    <br />
+    <button class="btn btn-block btn-black" id="add_btn">+</button>
+</div>
+
+
+{% endblock %}
+
+
+
+

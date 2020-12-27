@@ -1,0 +1,136 @@
+{% spaceless %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>{% if title %}{{ title }}{% else %}Report{% endif %}</title>
+    <meta charset="utf-8">
+
+    <script>
+        {% block jsVar %}
+        {% endblock %}
+    </script>
+    {% block viewport %}
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% endblock %}
+
+    {% load  static %}
+
+    {% block favicon %}
+<link rel="stylesheet" href="{% static 'slip/icon/fontawesome/css/all.css' %}">
+        
+        <link rel="shortcut icon" type="image/png" href="{%  static 'favicon.ico' %}"/>
+    {% endblock %}
+
+    {% if debug %}
+        <script>const DEBUG = true;</script>
+    {% else %}
+        <script>const DEBUG = false;</script>
+    {% endif %}
+
+    {% block jquery %}
+        <script src="{% static 'slip/js/jquery/jquery.js' %}"></script>
+    {% endblock %}
+
+    {% block bootstrap %}
+        <script src="{% static 'slip/js/bootstrap/bootstrap.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'slip/css/bootstrap/bootstrap.css' %}">
+    {% endblock %}
+
+    <script src = "{% static 'slip/js/main.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'slip/css/main.css' %}">
+
+    {%  block jsLib %}
+    {% endblock %}
+
+    {% block cssLib %}
+    {% endblock %}
+
+    {% block jsScript %}
+    {% endblock %}
+
+    {% block cssScript %}
+    {% endblock %}
+</head>
+<div>
+    {% csrf_token %}
+
+{#<!--  This is Top Navbar  -->#}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle"  target="myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><img height="35px" src="{%  static 'favicon.ico' %}" /></a>
+            </div>
+
+        <div  id="myNavbar" class="navbar-hide">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="{% url 'slip:home' %}">Home</a>
+                </li>
+            <li class="dropdown None">
+                    <a >Database &nbsp;<i  class="caret"></i></a>
+                    <div class="dropdown-content">
+                        <a href="{% url 'database:query' %}">Search</a>
+                        <a href="{% url 'database:diagnosis' %}">Diagnosis</a>
+                        <a href="{% url 'database:complain' %}">Complain</a>
+                        <a href="{% url 'database:ot-procedure' %}">OT Procedure</a>
+                        <a href="{% url 'database:medicine' %}">Medicine</a>
+                    </div>
+                </li>
+
+                {% block navPrintBtn %}
+                    <li><a href="#" id="print"><span class="glyphicon glyphicon-print"></span> Print</a></li>
+                    <li><a href="#" id="clear">Clear</a></li>
+                {% endblock %}
+            {% block navbarAdd %}{% endblock %}
+
+            </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="hidden_models">
+{% block modals %}
+    {% endblock %}
+</div>
+<!-- This is main page -->
+<div id="screen">
+
+<div style="display: none" id="dropdown">
+<div class="row">
+            <div class="col-lg-6">
+                <select class="form-control" option="dropdown"></select>
+            </div>
+            <div class="col-lg-6">
+                <select class="form-control" option="dropdown"></select>
+            </div>
+        </div>
+    {% block hiddenContent %}
+
+    {% endblock %}
+
+</div>
+    <div id="pageContent" class="container-fluid">
+        {% block header %}
+            <div class="row">
+        <div class="col-lg-12 col-sm-12">
+           <h4 class="center-text">Developed By: Aryan Amish</h4>
+        </div>
+    </div>
+        {% endblock %}
+        {% block content %}
+
+        {% endblock %}
+    </div>
+</div>
+</div>
+
+</body>
+</html>
+{% endspaceless %}

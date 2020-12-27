@@ -1,0 +1,29 @@
+{% extends 'slip/base.html' %}
+{% load static %}
+
+{% block navPrintBtn %}
+{% endblock %}
+
+{% block navbarAdd %}
+    <li><a href="#" id="db_save"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a></li>
+{% endblock %}
+
+{% block cssLib %}
+
+
+<link rel="stylesheet" href="{% static 'database/css/database.css'%}">
+
+{% endblock %}
+
+{% block jsLib %}
+
+    <script src="{% static 'database/js/database.js'%}"></script>
+    <script src="{% static 'database/js/ajax.js'%}"></script>
+
+{% endblock %}
+
+{% block jsScript %}
+    <script>
+        const db_save_url = "{{ request.path }}"
+    </script>
+{% endblock %}

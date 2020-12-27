@@ -1,0 +1,133 @@
+{% extends 'report/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block navbarPrint %}{% endblock %}
+{% block navbarAdd %}
+    <li>
+        <a style="display:none" class="save-btn glyphicon glyphicon-floppy-disk"
+           onclick="ajaxUpdateDatabase(document.querySelector('#modal_end form'))">
+
+        </a>
+    </li>
+{% endblock %}
+
+{% block cssLib %}
+    <link rel="stylesheet" href="{% static 'layout/css/main2.css' %}">
+    <link rel="stylesheet" href="{% static 'database/css/main.css' %}">
+{% endblock %}
+
+{% block jsLib %}
+    <script src="{% static 'report/js/plugin/Json2Html.js' %}"></script>
+    <script src="{% static 'database/js/plugin/right-click-menu.js' %}"></script>
+    <script src="{% static 'database/js/ajax.js' %}"></script>
+    <script src="{% static 'database/js/main.js' %}"></script>
+{% endblock %}
+
+{% block jsScript %}
+
+    <script>
+        const AJAX_SAVE_DATABASE_URL = "{% url 'database:ajax_save' %}";
+        const AJAX_LOAD_DATABASE_URL = "{% url 'database:ajax_load' %}";
+        const AJAX_UPDATE_DATABASE_URL = "{% url 'database:ajax_update' %}";
+
+
+    </script>
+{% endblock %}
+
+{% block outerContent %}
+    <div class="modal_diloge" id="database">
+        <div class="modal_dialoge_content animatezoomin">
+            <div id="modal_start">
+                <div id="tab" >
+                    <button class="tablinks default createNew" body="createDatabase">Create Database</button>
+                    <button class="tablinks load" body="editDatabase">Edit Database</button>
+                </div>
+                <!-- Tab content -->
+                <div id="createDatabase" class="tabcontent" >
+                    <form method = "POST" action="javascript:false;" onsubmit="ajaxCreateDatabase(this)" url="{% url 'database:ajax_save' %}" >{% csrf_token %}
+                        {{ db_form_save|crispy }}
+                        <button class='cornerBtn button' type="submit">Create</button>
+                    </form>
+                </div>
+                <div id="editDatabase" class="tabcontent" >
+
+
+                    <form method="POST" onsubmit="ajaxLoadDatabase(this)" url = "{% url 'database:ajax_load' %}" action="javascript:false;">{% csrf_token %}
+                        <div id='allDb' class="loading_div">
+                            <!-- <button class="load_temp_btn">Temp1</button><br> -->
+                           {% for i in db %}
+                               <button class="load_temp_btn" onclick="javascript:return false;">{{ i }}</button>
+                           {% endfor %}
+                        </div>
+                       <button class = "cornerBtn button" type="submit">Load</button>
+                    </form>
+                </div>
+            </div>
+            <div id="modal_end" style="display:none;">
+                <form method = "POST" action="javascript:false;" onsubmit="ajaxUpdateDatabase(this)" url="{% url 'database:ajax_update' %}">{% csrf_token %}
+
+                    <button class='cornerBtn button' type="submit">Update</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div id="rightClickMenu" style="display: none; top: 139px; left: 396px;">
+
+        <ul class="right-click-drop-down">
+            <div>
+                <li fun="add_col" shortcut="shift+x"><a>Add Column</a><shortcut>SHIFT+X</shortcut></li>
+                <li fun="delete_col" shortcut="shift+z"><a>Delete Column</a><shortcut>SHIFT+Z</shortcut></li>
+                <li fun="add_row" shortcut="shift+a"><a>Add Row</a><shortcut>SHIFT+A</shortcut></li>
+                <li fun="delete_row" shortcut="shift+d"><a>Delete Row</a><shortcut>SHIFT+D</shortcut></li>
+
+            </div>
+        </ul>
+
+    </div>
+    <div id="rightClickMenu2" style="display: none; top: 139px; left: 396px;">
+
+        <ul class="right-click-drop-down">
+            <div>
+                <li fun="add_col" shortcut="shift+x"><a>Add Column</a><shortcut>SHIFT+X</shortcut></li>
+                <li fun="delete_col" shortcut="shift+z"><a>Delete Column</a><shortcut>SHIFT+Z</shortcut></li>
+                <li fun="add_row" shortcut="shift+a"><a>Add Row</a><shortcut>SHIFT+A</shortcut></li>
+                <li fun="delete_row" shortcut="shift+d"><a>Delete Row</a><shortcut>SHIFT+D</shortcut></li>
+
+            </div>
+        </ul>
+
+    </div>
+{% endblock %}
+
+{% block body %}
+
+{% endblock %}
+
+
+{% block sidenavContent %}
+
+    {% for i in db %}
+        <li>
+            <a href="#"
+               onclick="ajaxLoadDatabase(document.querySelector('#editDatabase form'), '{{ i }}')">
+                {{ i }}
+            </a>
+        </li>
+    {% endfor %}
+
+{% endblock %}
+
+
+{##}
+{#{% block cssScript %}#}
+{#    <style>#}
+{#        #prntArea{#}
+{#            overflow-y: auto;#}
+{#            overflow-x: auto;#}
+{#            padding:10px;#}
+{#        }#}
+{#    table{#}
+{#    }#}
+{#    </style>#}
+{#{% endblock %}#}

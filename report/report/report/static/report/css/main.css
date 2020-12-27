@@ -1,0 +1,189 @@
+body{
+    overflow-y:hidden;
+    background: white url("../image/background.png");
+}
+
+
+
+/* styling sidenav */
+
+.sideNavActive{
+  background: #16A085;
+}
+
+#sidebar-wrapper{
+    float:left;
+    max-height:calc(100% - 51.49px);
+    z-index: 1;
+    position: absolute;
+    max-width:300px;
+    width: 0px;
+    height: 100%;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.84);
+
+    right:0;
+    /* Safari */
+    -webkit-transition: width 0.5s;
+    -webkit-transition-timing-function: cubic-bezier(1, -0.04, 0, 1.01);
+    /*safari */
+    transition: width 0.5s;
+    transition-timing-function: cubic-bezier(1, -0.04, 0, 1.01);
+}
+
+#wrapper{
+    padding-top:51.49px;
+
+}
+
+
+.menuDisplayed #page-content-wrapper{
+  width:calc(74%);
+  min-width:calc(100% - 300px)
+}
+
+.menuDisplayed #sidebar-wrapper{
+  width:calc(26%);
+}
+
+
+#page-content-wrapper{
+    float:left;
+    max-height:calc(100% - 51.49px);
+    height:100%;
+    position:absolute;
+    padding: 15px;
+    overflow-y:auto;
+    overflow-x: auto;
+    /* Safari */
+    -webkit-transition: width 0.5s;
+    -webkit-transition-timing-function: cubic-bezier(1, -0.04, 0, 1.01);
+    /*safari */
+    transition: width 0.5s;
+    transition-timing-function: cubic-bezier(1, -0.04, 0, 1.01);
+
+}
+/*
+#wrapper.menuDisplayed #sidebar-wrapper{
+    width:250px;
+} */
+
+/* #wrapper.menuDisplayed #page-content-wrapper{
+    padding-right:250px;
+} */
+
+.sidebar{
+    padding:0;
+    list-style: none;
+}
+
+.sidebar li{
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar li a{
+    display: block;
+    text-decoration: none;
+    color: #ddd;
+}
+
+.sidebar li a:hover{
+    background: #16A085;
+    cursor:pointer;
+}
+/* sidenav styling ends here */
+
+
+
+/* styling admin login modal */
+#menu-toggle{
+    padding:5px;
+}
+
+input[name=uname], input[name=psw] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+#adminAvatar{
+  height:150px;
+  width:150px;
+}
+/* styling admin login modal ends here */
+
+
+
+/* styling scroll bar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+/*scroll bar styling ends here */
+
+
+/* print statement */
+
+#prntHiddenArea{
+    display:none;
+}
+@media print {
+   .scrn {
+       display: none;
+    }
+    #prntHiddenArea {
+       display: block;
+    }
+}
+
+/* editing modals and page */
+
+input[drop-txt='true'],.edit{
+    width: 90%;
+    padding: 12px 20px;
+    margin-top:8px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+.drop-btn{
+  padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+
+}
+.drop-menu{
+    width:90%;
+    position:absolute;
+
+}
+.button{
+    background-color: #040604;
+    color: white;
+    outline:0;
+  padding: 14px 20px;
+  margin: 25px 0px;
+  border: none;
+  cursor: pointer;
+    text-align:center;
+}
+.button:hover{
+    background-color:#040604e6;
+}

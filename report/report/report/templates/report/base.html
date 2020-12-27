@@ -1,0 +1,153 @@
+{#{% spaceless %}#}
+
+{% url 'layout:main' as layout_url %}
+{% url 'report:index' as report_url %}
+{% url 'database:main' as db_url %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>{% if title %}{{ title }}{% else %}Report{% endif %}</title>
+    <meta charset="utf-8">
+
+    {% block viewport %}
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% endblock %}
+
+    {% load  static %}
+
+    {% block favicon %}
+        <link rel="shortcut icon" type="image/png" href="{%  static 'report/image/favicon.ico' %}"/>
+    {% endblock %}
+
+    {% if debug %}
+        <script>const DEBUG = true;</script>
+    {% else %}
+        <script>const DEBUG = false;</script>
+    {% endif %}
+
+    {% block jquery %}
+        <script src="{% static 'report/js/jquery/jquery.js' %}"></script>
+    {% endblock %}
+
+    {% block bootstrap %}
+        <script src="{% static 'report/js/bootstrap/bootstrap.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'report/css/bootstrap/bootstrap.css' %}">
+    {% endblock %}
+
+    <script src = "{% static 'report/js/main.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'report/css/main.css' %}">
+
+    {%  block jsLib %}
+    {% endblock %}
+
+    {% block cssLib %}
+    {% endblock %}
+
+    {% block jsScript %}
+    {% endblock %}
+
+    {% block cssScript %}
+    {% endblock %}
+
+</head>
+<body>
+<div class="scrn">
+
+    {% block outerContent %}
+    {% endblock %}
+    <!-- this is top navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top " >
+		<div class="container-fluid">
+			<!-- logo -->
+            <div class="navbar-header">
+                <a href="" class="navbar-brand">LOGO</a>
+			</div>
+
+			<div class='collapse navbar-collapse' id="navMainMenu">
+				<ul class="nav navbar-nav">
+                    {% block navbarContent%}
+                        <li {% ifequal request.path report_url %} class="active" {% endifequal %}>
+                            <a href="{% url 'report:index' %}">Home</a>
+                        </li>
+                        <li ><a href="javascript:return false" data-toggle="modal" data-target="#modalAdmin">Edit</a> </li>
+                        <li {% ifequal request.path layout_url %} class="active" {% endifequal %}>
+                            <a href="{% url 'layout:main' %}">Layout</a>
+                        </li>
+                         <li {% ifequal request.path db_url %} class="active" {% endifequal %}>
+                            <a href="{% url 'database:main' %}">Database</a>
+                        </li>
+
+                        {% block navbarPrint %}
+                            <li ><a href="#" class="glyphicon glyphicon-print" aria-hidden="true" id="prntBtn"></a></li>
+                        {% endblock %}
+                        {% block navbarAdd %}
+                            {# This is whenre extra button can be added #}
+                        {% endblock %}
+                    {% endblock %}
+                </ul>
+                <ul class="navbar-right">
+                    <div type="button" class="navbar-toggle"  style="display: block" id="menu-toggle">
+					<span class='icon-bar'></span>
+					<span class='icon-bar'></span>
+					<span class='icon-bar'></span>
+				</div>
+                </ul>
+			</div>
+		</div>
+    </nav>
+
+    <!-- this is side bar -->
+    <div id="wrapper" class="menuDisplayed">
+
+        <!-- sidebar-->
+
+        <div id="sidebar-wrapper" >
+            {% block sidebar %}
+               <ul class="sidebar">
+                   {% block sidenavContent %}
+
+                   {% endblock %}
+               </ul>
+            {% endblock %}
+        </div>
+
+
+        <!-- main page -->
+        <div class="container-fluid" id="page-content-wrapper">
+            <div class="row" id="prntArea">
+                    {% block body %}
+
+                    {% endblock %}
+            </div>
+        </div>
+    </div>
+
+    {% block admin %}
+        <!-- this is adminModal-->
+        <div class="modal fade" id="modalAdmin">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                     <!-- Modal Header -->
+                    <div class="modal-header ">
+                        <span type="button" class="close glyphicon glyphicon-remove" data-dismiss="modal"></span>
+                            <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4">
+                                <img id="adminAvatar" class="img-responsive img-circle"  src="{% static 'report/image/profilepic.jpg' %}" />
+                            </div>
+                        <form mehtod="POST" action="#" >
+                            <input  type="text" name="uname" placeholder="User Name" />
+                            <input  type="password" name="psw" placeholder="Password" />
+                            <input  type="submit" name="submit" class="btn btn-success" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+</div>
+<div id="prntHiddenArea"></div>
+</body>
+</html>
+{#{% endspaceless %}#}
+

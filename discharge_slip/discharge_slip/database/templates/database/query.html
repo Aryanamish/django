@@ -1,0 +1,96 @@
+{% extends 'database/base.html' %}
+{% load errors %}
+{% block navbarAdd %}
+{% endblock %}
+{% block content %}
+
+    <div class="container-fluid">
+        <form action="#" method="GET">
+            <div class="col-lg-6 col-sm-6">
+                <div class="col-lg-2 col-sm-2"><input type="checkbox" target="slip_id"/></div>
+                <div class="col-lg-3 col-sm-3"><label class="control-label">Slip Id</label></div>
+                <div class="col-lg-7 col-sm-7">{{ form.slip_id }}</div>
+            </div>
+            <div class="col-lg-6 col-sm-6">
+                <div class="col-lg-2 col-sm-2"><input type="checkbox" target="patient_id"/></div>
+                <div class="col-lg-3 col-sm-3"><label class="control-label">Patient Id</label></div>
+                <div class="col-lg-7 col-sm-7">{{ form.patient_id }}</div>
+            </div>
+            <div class="col-lg-6 col-sm-6">
+                <div class="col-lg-2 col-sm-2"><input type="checkbox" target="name"/></div>
+                <div class="col-lg-3 col-sm-3"><label class="control-label">Name</label></div>
+                <div class="col-lg-7 col-sm-7">{{ form.name }}</div>
+            </div>
+            <div class="col-lg-6 col-sm-6">
+                <div class="col-lg-2 col-sm-2"><input type="checkbox" target="age"/></div>
+                <div class="col-lg-3 col-sm-3"><label class="control-label">Age</label></div>
+                <div class="col-lg-7 col-sm-7">{{ form.age }}</div>
+            </div>
+
+
+
+            <div class="col-lg-6 col-sm-6">
+                <div class="col-lg-2 col-sm-2"><input type="checkbox" target="sex"/></div>
+                <div class="col-lg-3 col-sm-3"><label class="control-label">Sex</label></div>
+                <div class="col-lg-7 col-sm-7">
+                    {{ form.sex }}
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-sm-6">
+                <div class="col-lg-2 col-sm-2"><input type="checkbox" target="date_of_admission"/></div>
+                <div class="col-lg-3 col-sm-3"><label class="control-label">Date of Admission</label></div>
+                <div class="col-lg-7 col-sm-7">{{ form.date_of_admission }}</div>
+            </div>
+            <div class="col-lg-6 col-sm-6">
+                <div class="col-lg-2 col-sm-2"><input type="checkbox" target="date_of_operation"/></div>
+                <div class="col-lg-3 col-sm-3"><label class="control-label">Date of Operation</label></div>
+                <div class="col-lg-7 col-sm-7">{{ form.date_of_operation }}</div>
+            </div>
+            <div class="col-lg-6 col-sm-6">
+                <div class="col-lg-2 col-sm-2"><input type="checkbox" target="date_of_discharge"/></div>
+                <div class="col-lg-3 col-sm-3"><label class="control-label">Date of Discharge</label></div>
+                <div class="col-lg-7 col-sm-7">{{ form.date_of_discharge }}</div>
+            </div>
+            <br/>
+            <p><input  type="submit" value="Search" class="btn btn-success" /></p>
+       </form>
+    <hr />
+    <br />
+    </div>
+
+    {% if query %}
+        <div>
+            <table class="table patient_table table">
+                <tr>
+                    <th>Slip Id</th>
+                    <th>Patient Name</th>
+                    <th>Sex</th>
+                    <th>Age</th>
+                    <th>Date of Operation</th>
+                </tr>
+                {% for i in query %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'print:pdf' %}?{{ form.slip_id.name }}={{ i.slip_id }}" target="_blank">
+                                {{ i.slip_id|slip_id }}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'database:query' %}?{{ form.patient_id.name }}={{ i.patient_id.patient_id }}">
+                                {{ i.patient_id.patient_name }}
+                            </a>
+                        </td>
+                        <td>{{ i.patient_id.sex }}</td>
+                        <td>{{ i.patient_id.age }}</td>
+                        <td>{{ i.date_of_operation }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    {% endif %}
+
+{% endblock %}
+
+
+
